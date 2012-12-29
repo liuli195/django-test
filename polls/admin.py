@@ -22,4 +22,3 @@ class PollAdmin(admin.ModelAdmin):
     search_fields = ['question']
 
 admin.site.register(Poll, PollAdmin)
-admin.site.register(Choice)
