@@ -49,28 +49,36 @@ class ChoiceAdmin(admin.ModelAdmin):
         
         opts = self.model._meta
         app_label = opts.app_label
-        polls_list = opts.poll.objects.all()
-        
-        if request.POST.get('post'):
-            n = queryset.count()
-            if n:
-                for obj in queryset:
-                    obj_display = force_unicode(obj)
-                    self.log_change(request, obj, obj_display)
-                    queryset.updata()
-                    self.message_user(request, _("成功修改 %(count)个 %(items)。") % {
-                        "count": n, "items": model_ngettext(self.opts, n)
-                    })
-
-            return None
+        polls_list = Poll.objects.all()
         
         context = {
+        'title': '修改问题',
         'queryset': queryset,
         "opts": opts,
         "app_label": app_label,
         "polls_list":  polls_list
         }
         
+        if request.POST.get('post'):
+
+            n = queryset.count()
+            if n:
+                for obj in queryset:
+                    obj_display = force_unicode(obj)
+                    self.log_change(request, obj, obj_display)
+                    queryset.all().update(votes=int(request.POST['poll']))
+                    self.message_user(request, _("成功修改 %(count)个 %(items)。") % {
+                        "count": n, "items": model_ngettext(self.opts, n)
+                    })
+
+            #return None
+            
+            #return TemplateResponse(request, 'admin/test.html', {
+                    #"opts": opts,
+                    #"app_label": app_label,
+                    #"choices": request.POST['choice'],
+                #})
+
         return TemplateResponse(request, 'admin/test.html', context)
     
     export_selected_objects.short_description = '修改'
