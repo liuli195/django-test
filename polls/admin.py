@@ -26,7 +26,7 @@ class PollAdmin(admin.ModelAdmin):
     search_fields = ['question']
 
     actions = ['make_published']
-    
+    '''
     def make_published(self, request, queryset):
         rows_updated = queryset.update(question='p')
         if rows_updated == 1:
@@ -36,7 +36,7 @@ class PollAdmin(admin.ModelAdmin):
         self.message_user(request, "%s successfully marked as published." % message_bit)
          
     make_published.short_description = "Mark selected"
-
+    '''
 class ChoiceAdmin(admin.ModelAdmin):
     
     list_display = ('poll', 'choice', 'votes')    
