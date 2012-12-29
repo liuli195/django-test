@@ -24,7 +24,7 @@ class PollAdmin(admin.ModelAdmin):
     list_display = ('question', 'pub_date', 'choice_num')    
     list_filter = ['pub_date']
     search_fields = ['question']
-
+    
     actions = ['make_published']
     '''
     def make_published(self, request, queryset):
