@@ -10,7 +10,7 @@ from etask.models import task_list, task
 def index(request):
 
     latest_task_list = task_list.objects.all().order_by('-pub_date')
-    c = Context({
+    c = RequestContext(request, {
         'latest_task_list': latest_task_list,
     })
 
