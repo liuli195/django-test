@@ -6,7 +6,7 @@ admin.autodiscover()
 
 urlpatterns = patterns('',
     url(r'^polls/', include('polls.urls')),
-    url(r'^etask/', include('etask.urls')),
+    #url(r'^etask/', include('etask.urls')),
     # Examples:
     # url(r'^$', 'mydjango.views.home', name='home'),
     # url(r'^mydjango/', include('mydjango.foo.urls')),
