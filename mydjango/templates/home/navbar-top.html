@@ -3,21 +3,34 @@
 {% block navbar-top %}
 	<div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
-        <div class="container">
+        <div class="container margin">
           <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </a>
-          <a class="brand" href="/../">My Project</a>
           <div class="nav-collapse collapse">
             <ul class="nav">
+              <li class="active"><a href="/../">Home</a></li>
               <li><a href="/polls/">Polls</a></li>
               <li><a href="/etask/">Etask</a></li>
-              <li><a href="/admin/">Admin</a></li>
+              <li><a href="/admin/" target="_blank">Admin</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>
       </div>
     </div>
+{% endblock %}
+
+
+{% block navlist %}
+      	  <ul class="nav nav-list bs-docs-sidenav affix">
+  			<li ><a href="#"><i class="icon-chevron-right"></i>Home</a></li>
+  			<li class="active"><a href="#"><i class="icon-chevron-right"></i>Library</a></li>
+  			<li ><a href="#"><i class="icon-chevron-right"></i>Home</a></li>
+  			<li ><a href="#"><i class="icon-chevron-right"></i>Home</a></li>
+  			<li ><a href="#"><i class="icon-chevron-right"></i>Home</a></li>
+  			<li ><a href="#"><i class="icon-chevron-right"></i>Home</a></li>
+  			<li ><a href="#"><i class="icon-chevron-right"></i>Home</a></li>
+		  </ul>
 {% endblock %}
