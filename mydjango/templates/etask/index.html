@@ -1,5 +1,6 @@
-{% extends "etask/base.html" %}
+{% extends "home/navbar-top.html" %}
 
+{% block content %}
 {% if latest_task_list %}
     <ul>
     {% for task_list in latest_task_list %}
@@ -9,3 +10,4 @@
 {% else %}
     <p>没有有效的列表！</p>
 {% endif %}
+{% endblock %}

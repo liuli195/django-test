@@ -1,6 +1,6 @@
 #coding=UTF-8
 
-from django.template import Context, RequestContext
+from django.template import RequestContext
 from polls.models import Poll, Choice
 from django.http import HttpResponseRedirect
 from django.shortcuts import render_to_response, get_object_or_404
@@ -9,7 +9,7 @@ from django.core.urlresolvers import reverse
 def index(request):
 
     latest_poll_list = Poll.objects.all().order_by('-pub_date')
-    c = Context({
+    c = RequestContext(request, {
         'latest_poll_list': latest_poll_list,
     })
 
@@ -43,7 +43,7 @@ def vote(request, poll_id):
 def results(request, poll_id):
 
     p = get_object_or_404(Poll, pk=poll_id)
-    c = Context({
+    c = RequestContext(request, {
         'poll': p,
         })
     return render_to_response('polls/results.html', c)

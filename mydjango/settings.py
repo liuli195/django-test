@@ -125,6 +125,7 @@ INSTALLED_APPS = (
     #'django.contrib.admindocs',
     'polls',
     'etask',
+    'home',
 )
 
 # A sample logging configuration. The only tangible logging

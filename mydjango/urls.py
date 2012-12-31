@@ -6,6 +6,7 @@ from django.contrib import admin
 admin.autodiscover()
 
 urlpatterns = patterns('',
+    url(r'^$', include('home.urls')),
     url(r'^polls/', include('polls.urls')),
     url(r'^etask/', include('etask.urls')),
     # Examples:

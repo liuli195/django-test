@@ -1,3 +1,6 @@
+{% extends "home/navbar-top.html" %}
+
+{% block content %}
 <h1><a href="/polls/">{{ poll.question }}</a></h1>
 
 <ul>
@@ -5,3 +8,4 @@
     <li>{{ choice.choice }} -- {{ choice.votes }} 票</li>
 {% endfor %}
 </ul>
+{% endblock %}

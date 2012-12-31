@@ -1,3 +1,6 @@
+{% extends "home/navbar-top.html" %}
+
+{% block content %}
 {% if poll %}
 <h1><a href="/polls/">{{ poll.question }}</a></h1>
 
@@ -15,3 +18,4 @@
 {% else %}
     <p>没有有效的选项！</p>
 {% endif %}
+{% endblock %}
