@@ -1,13 +1,11 @@
 {% extends "home/navbar-top.html" %}
 
-{% block content %}
-{% if latest_task_list %}
-    <ul>
+{% block nav-list-name %}
+  {% if latest_task_list %}
     {% for task_list in latest_task_list %}
-        <li><a href="/etask/{{ task_list.id }}/">{{ task_list.list_name }}</a></li>
+      <li ><a href="/etask/{{ task_list.id }}/">
+  	    <i class="icon-chevron-right"></i>{{ task_list.list_name }}</a>
+      </li>
     {% endfor %}
-    </ul>
-{% else %}
-    <p>没有有效的列表！</p>
-{% endif %}
+  {% endif %}
 {% endblock %}

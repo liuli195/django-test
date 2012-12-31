@@ -34,7 +34,8 @@
    	{% block navbar-top %}
    	{% endblock %}
    	
-   	<div class="subnav affix">
+   	{% block content %}
+   	<div class="container subnav affix">
    	{% block subnav %}
    	{% endblock %}
    	</div>
@@ -48,17 +49,16 @@
     	</div>
     	
         <div class="span9 subnavpadd">
-          {% block content %}
+          {% block incontent %}
           <div>
-            <h1>starter template</h1>
-            <p>Use this document as a way to quick start any new project</p>
+            <h1>一切从这里开始！</h1>
           </div>
           {% endblock %}          
     	</div>
     	
   	  </div>
     </div>
-    
+    {% endblock %}
     <!-- Le javascript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->

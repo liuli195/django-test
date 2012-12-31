@@ -11,10 +11,10 @@
           </a>
           <div class="nav-collapse collapse">
             <ul class="nav">
-              <li class="active"><a href="/../">Home</a></li>
-              <li><a href="/polls/">Polls</a></li>
-              <li><a href="/etask/">Etask</a></li>
-              <li><a href="/admin/" target="_blank">Admin</a></li>
+              <li {% if home %}class="active"{% endif %}><a href="/../">Home</a></li>
+              <li {% if polls %}class="active"{% endif %}><a href="/polls/">Polls</a></li>
+              <li {% if etask %}class="active"{% endif %}><a href="/etask/">Etask</a></li>
+              <li><a href="/admin/">Admin</a></li>
             </ul>
           </div><!--/.nav-collapse -->
         </div>
@@ -22,15 +22,24 @@
     </div>
 {% endblock %}
 
+{% block subnav %}
+  	  <div class="row-fluid">
+  	  	<div class="span3 horizontal-center vertical-center title-font">
+        <strong>{% if appname %}{{ appname }}{% endif %}</strong>
+        <small class="muted smll-font">{% if note %}{{ note }}{% endif %}</small>
+        </div>
+        <div class="span9 vertical-center">
+  			<button class="btn">左边</button>
+  			<button class="btn">中间</button>
+  			<button class="btn">右边</button>
+		  	<button class="btn">左边</button>
+    	</div>  	
+  	  </div>
+{% endblock %}
 
 {% block navlist %}
-      	  <ul class="nav nav-list bs-docs-sidenav affix">
-  			<li ><a href="#"><i class="icon-chevron-right"></i>Home</a></li>
-  			<li class="active"><a href="#"><i class="icon-chevron-right"></i>Library</a></li>
-  			<li ><a href="#"><i class="icon-chevron-right"></i>Home</a></li>
-  			<li ><a href="#"><i class="icon-chevron-right"></i>Home</a></li>
-  			<li ><a href="#"><i class="icon-chevron-right"></i>Home</a></li>
-  			<li ><a href="#"><i class="icon-chevron-right"></i>Home</a></li>
-  			<li ><a href="#"><i class="icon-chevron-right"></i>Home</a></li>
-		  </ul>
+  <ul class="nav nav-list bs-docs-sidenav affix">
+    {% block nav-list-name %}
+    {% endblock %}
+  </ul>
 {% endblock %}
