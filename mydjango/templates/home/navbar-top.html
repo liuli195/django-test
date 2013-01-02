@@ -12,8 +12,8 @@
           <div class="nav-collapse collapse">
             <ul class="nav">
               <li {% if home %}class="active"{% endif %}><a href="/../">首页</a></li>
-              <li {% if polls %}class="active"{% endif %}><a href="/polls/">投票</a></li>
               <li {% if etask %}class="active"{% endif %}><a href="/etask/">任务</a></li>
+              <li {% if polls %}class="active"{% endif %}><a href="/polls/">投票</a></li>
               <li><a href="/admin/">管理</a></li>
             </ul>
           </div><!--/.nav-collapse -->
@@ -29,10 +29,15 @@
         <small class="muted smll-font">{% if note %}{{ note }}{% endif %}</small>
         </div>
         <div class="span9 vertical-center">
-  			<button class="btn">左边</button>
-  			<button class="btn">中间</button>
-  			<button class="btn">右边</button>
-		  	<button class="btn">左边</button>
+  			<button class="btn mybutton"><input type="checkbox" id='all'/></button>
+  			<button class="btn btn-primary mybutton">新增</button>
+  			{% block btngroup %}
+  			<span id="btn-hide" style="display: none;">
+  			<input type="submit" name="fulfill" value="完成" class="btn mybutton" />
+  			<input type="submit" name="move" value="移动" class="btn mybutton" />
+  			<input type="submit" name="delete" value="删除" class="btn mybutton" />
+  			</span>
+  			{% endblock %}
     	</div>  	
   	  </div>
 {% endblock %}

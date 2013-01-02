@@ -21,7 +21,7 @@ class task_list(models.Model):
     
 class task(models.Model):
     
-    task_list = models.ForeignKey(task_list)
+    task_list = models.ForeignKey(task_list, verbose_name='任务列表')
     task_text = models.CharField('任务', max_length=200)
     priority = models.IntegerField('优先级')
     pub_date = models.DateTimeField('创建时间')

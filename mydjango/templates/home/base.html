@@ -34,6 +34,7 @@
    	{% block navbar-top %}
    	{% endblock %}
    	
+    <form action="{{ url_actions }}" method="post" id="edit-list">
    	{% block content %}
    	<div class="container subnav affix">
    	{% block subnav %}
@@ -59,7 +60,7 @@
   	  </div>
     </div>
     {% endblock %}
-    
+    </form>
     {% block footer %}
     {% endblock %}
     <!-- Le javascript
@@ -67,6 +68,7 @@
     <!-- Placed at the end of the document so the pages load faster -->
     <script src="{{ STATIC_URL }}js/jquery.js"></script>
     <script src="{{ STATIC_URL }}js/bootstrap.min.js"></script>
+    <script src="{{ STATIC_URL }}js/base.js"></script>
 
   </body>
 </html>

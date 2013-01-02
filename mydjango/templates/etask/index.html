@@ -2,10 +2,43 @@
 
 {% block nav-list-name %}
   {% if latest_task_list %}
+    <li {% ifequal activeid 'home' %}class="active"{% endifequal %}>
+      <a href="/etask/">
+  	    <i class="icon-chevron-right"></i>全部任务
+  	  </a>
+    </li>
     {% for task_list in latest_task_list %}
-      <li ><a href="/etask/{{ task_list.id }}/">
-  	    <i class="icon-chevron-right"></i>{{ task_list.list_name }}</a>
+      <li {% ifequal activeid task_list.id %}class="active"{% endifequal %}>
+      	<a href="/etask/{{ task_list.id }}/">
+  	      <i class="icon-chevron-right"></i>{{ task_list.list_name }}
+  	    </a>
       </li>
     {% endfor %}
   {% endif %}
+{% endblock %}
+
+{% block incontent %}
+<table class="table table-hover table-condensed">
+              <tbody id="selected-light">
+              	{% for task in all_task %}
+                <tr id={{ task.id }}>
+                  <td><input type="checkbox" id={{ task.id }} /></td>     
+                  
+                  {% ifequal task.priority 1 %}
+                  <td><span class="badge badge-success">{{ task.priority }}</span></td>
+                  {% endifequal %}                
+                  {% ifequal task.priority 2 %}
+                  <td><span class="badge badge-warning">{{ task.priority }}</span></td>
+                  {% endifequal %}
+                  {% ifequal task.priority 3 %}
+                  <td><span class="badge badge-important">{{ task.priority }}</span></td>
+                  {% endifequal %}
+                  
+                  <td>{{ task.task_text }}</td>
+                  <td>{{ task.task_list }}</td>
+                  <td>{{ task.pub_date }}</td>
+                </tr>
+                {% endfor %}
+              </tbody>
+            </table>
 {% endblock %}

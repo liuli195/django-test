@@ -1107,3 +1107,8 @@ form.bs-docs-example {
 .smll-font {
 	font-size:5px;
 }
+
+.mybutton {
+	padding: 4px 18px;
+	margin:  0px 6px;
+}
