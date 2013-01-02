@@ -18,8 +18,6 @@ def index(request):
         'latest_task_list': latest_task_list,
         'all_task': all_task,
         'etask': 'yes',
-        'appname': 'Easy Task',
-        'note': '轻量级的任务管理系统',
         'activeid': 'home',
         'url_actions': url_actions,
     })
@@ -37,8 +35,6 @@ def t_list(request, list_id):
         'latest_task_list': latest_task_list,
         'all_task': all_task,
         'etask': 'yes',
-        'appname': 'Easy Task',
-        'note': '轻量级的任务管理系统',
         'activeid': t.id,
         'url_actions': url_actions,
     })

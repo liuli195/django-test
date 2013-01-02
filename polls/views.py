@@ -12,8 +12,6 @@ def index(request):
     c = RequestContext(request, {
         'latest_poll_list': latest_poll_list,
         'polls': 'yes',
-        'appname': 'Polls',
-        'note': '轻量级的投票系统',
     })
 
     return render_to_response('polls/index.html', c)

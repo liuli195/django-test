@@ -25,17 +25,17 @@
 {% block subnav %}
   	  <div class="row-fluid">
   	  	<div class="span3 horizontal-center vertical-center">
-        <button type="submit" name="add" class="btn btn-danger myaddbutton">新增任务</button>
+        <button name="add" class="btn btn-primary myaddbutton">新增任务</button>
         </div>
         <div class="span9 vertical-center">
-  			<button class="btn mybutton"><input type="checkbox" id='all'/></button>
+  			<a class="btn disabled mybutton"><input type="checkbox" id='all'/></a>
   			{% block btngroup %}
   			<span id="btn-hide" style="display: none;">
-  			<!--{for button in button_list}-->
+  			{for button in button_list}
   			<input type="submit" name="fulfill" value="完成" class="btn mybutton" />
   			
   			<div class="btn-group">
-  			<button type="submit" name="move" class="btn dropdown-toggle mybutton" data-toggle="dropdown" />
+  			<button name="move" class="btn dropdown-toggle mybutton" data-toggle="dropdown" />
   			移至 
   			<span class="caret"></span></button>
   				<ul class="dropdown-menu">

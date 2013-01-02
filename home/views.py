@@ -7,8 +7,6 @@ def index(request):
     
     c = RequestContext(request, {
         'home': 'yes',
-        'appname': 'Home Page',
-        'note': '导航到应用和管理后台',
     })
 
     return render_to_response('home/index.html', c)
