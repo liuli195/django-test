@@ -22,7 +22,7 @@
               <tbody id="selected-light">
               	{% for task in all_task %}
                 <tr id={{ task.id }}>
-                  <td><input type="checkbox" id={{ task.id }} /></td>     
+                  <td><input type="checkbox" id={{ task.id }} name="chioce-{{ task.id }}" value="{{ task.id }}" /></td>
                   
                   {% ifequal task.priority 1 %}
                   <td><span class="badge badge-success">{{ task.priority }}</span></td>

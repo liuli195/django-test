@@ -1,0 +1,14 @@
+{% extends "home/navbar-top.html" %}
+
+{% block content %}
+    <ul>
+    {% for key in queryset %}
+        {{ key }}</br>
+    {% endfor %}
+    </ul>
+    <ul>
+    {% for key in value_list %}
+        {{ key }}</br>
+    {% endfor %}
+    </ul>
+{% endblock %}

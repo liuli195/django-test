@@ -24,17 +24,28 @@
 
 {% block subnav %}
   	  <div class="row-fluid">
-  	  	<div class="span3 horizontal-center vertical-center title-font">
-        <strong>{% if appname %}{{ appname }}{% endif %}</strong>
-        <small class="muted smll-font">{% if note %}{{ note }}{% endif %}</small>
+  	  	<div class="span3 horizontal-center vertical-center">
+        <button type="submit" name="add" class="btn btn-danger myaddbutton">新增任务</button>
         </div>
         <div class="span9 vertical-center">
   			<button class="btn mybutton"><input type="checkbox" id='all'/></button>
-  			<button class="btn btn-primary mybutton">新增</button>
   			{% block btngroup %}
   			<span id="btn-hide" style="display: none;">
+  			<!--{for button in button_list}-->
   			<input type="submit" name="fulfill" value="完成" class="btn mybutton" />
-  			<input type="submit" name="move" value="移动" class="btn mybutton" />
+  			
+  			<div class="btn-group">
+  			<button type="submit" name="move" class="btn dropdown-toggle mybutton" data-toggle="dropdown" />
+  			移至 
+  			<span class="caret"></span></button>
+  				<ul class="dropdown-menu">
+    			<li><a href="#">1111</a></li>
+    			<li><a href="#">2222</a></li>
+    			<li><a href="#">3333</a></li>
+    			<li><a href="#">4444</a></li>
+  				</ul>
+  			</div>
+  			
   			<input type="submit" name="delete" value="删除" class="btn mybutton" />
   			</span>
   			{% endblock %}

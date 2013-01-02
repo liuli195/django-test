@@ -41,5 +41,11 @@ $(document).ready(function(){
     })
     
     $('#selected-light > tr:has(:checked)').addClass("info");
+    
+    if($("#selected-light").find('input:checkbox:checked').length != 0){
+    	$("#btn-hide").each(function() {
+    		$(this).show();
+    	})
+    }
 
 })

@@ -1092,16 +1092,10 @@ form.bs-docs-example {
 
 .vertical-center {
     line-height: 36px;
-	overflow: hidden;
 }
 
 .horizontal-center {
 	text-align: center;
-}
-
-.title-font {
-	font-size: 20px;
-	color: #d64937;
 }
 
 .smll-font {
@@ -1111,4 +1105,12 @@ form.bs-docs-example {
 .mybutton {
 	padding: 4px 18px;
 	margin:  0px 6px;
+}
+
+.myaddbutton{
+	padding: 4px 30px;
+}
+
+#btn-hide > .btn:first-child {
+	margin-right: 12px;
 }
