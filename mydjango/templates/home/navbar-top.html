@@ -28,30 +28,8 @@
         <button name="add" class="btn btn-danger myaddbutton">新增任务</button>
         </div>
         <div class="span9 vertical-center">
-  			<a class="btn disabled mybutton"><input type="checkbox" id='all'/></a>
+  			<a class="btn disabled mybutton"><input type="checkbox" id='all'/></a> 			
   			{% block btngroup %}
-  			<span id="btn-hide" style="display: none;">
-  				
-  			{% for button in button_list %}
-  			
-  			<button name="fulfill" class="btn mybutton">完成</button>
-  			
-  			<div class="btn-group">
-  			<button name="move" class="btn dropdown-toggle mybutton" data-toggle="dropdown" />
-  			移至 
-  			<span class="caret"></span></button>
-  				<ul class="dropdown-menu">
-    			<li><a href="#">1111</a></li>
-    			<li><a href="#">2222</a></li>
-    			<li><a href="#">3333</a></li>
-    			<li><a href="#">4444</a></li>
-  				</ul>
-  			</div>
-  			
-  			<input type="submit" name="delete" value="删除" class="btn mybutton" />
-  			{% endfor %}
-  			
-  			</span>
   			{% endblock %}
     	</div>  	
   	  </div>
