@@ -1,36 +1,18 @@
 #coding=UTF-8
 
-class subnav_button_data:
-    def __init__(self):
-        self.button_data = [
-            [30, 'fulfill', '完成', 'none', 'show'],
-            [20, 'move', '移至', 'dropdown', 'show'],
-            [1, 'delete', '删除', 'none', 'show'],
-            [4, 'delete', '删除', 'none', 'show'],
-            [99, 'delete', '删除', 'none', 'show'],
-            [32, 'delete', '删除', 'none', 'show'],
-        ]
-    
-    def button_sort(self):
-        id_sort_list = []
-        button_data_sort = []
-        
-        for ids in self.button_data:
-            index = self.button_data.index(ids)
-            id_sort_list.append([ids[0],index])
-            
-        id_sort_list.sort()
-        
-        for ids in id_sort_list:
-            button_data_sort.append(self.button_data[ids[1]])
-           
-        return button_data_sort
-       
+from etask.models import task_list, task
 
-data = subnav_button_data()
-print data.button_data
-button_data_sorts = data.button_sort()
-print button_data_sorts
+def all_task_list():
+    latest_task_list = task_list.objects.all()
+    all_task_list = []
+    
+    for task_list_obj in  latest_task_list:
+        if (task_list_obj.id != 6) and (task_list_obj.id != 7):
+            all_task_list.append(task_list_obj.id)
+            
+    return all_task_list
+
+print all_task_list()
 
 
 

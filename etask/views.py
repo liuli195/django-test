@@ -11,19 +11,20 @@ from etask.models import task_list, task
 class subnav_button_data:
     def __init__(self):
         self.button_data = [
-            [10, 'fulfill', '完成', 'none', 'show'],
-            [20, 'move', '移至', 'dropdown', 'show'],
-            [30, 'delete', '删除', 'none', 'show'],
+            [10, 'fulfill', '完成', 'none', 'show', []],
+            [20, 'move', '移至', 'dropdown', 'show', []],
+            [30, 'delete', '删除', 'none', 'show', []],
         ]
         
     def add_dropdown_menu(self, name, menu):
         for button in self.button_data:
             if name in button:
-                button.append(menu)                
+                del button[5]
+                button.append(menu)    
         
-    def change_state(self, key, state):
-        for keys in key:
-            if keys in self.button_data:
+    def change_state(self, keys, state):
+        for key in keys:
+            if key in self.button_data:
                 self.button_data[keys][3] = state
             
     def change_key(self, key, target_key):
@@ -47,7 +48,7 @@ class subnav_button_data:
         return button_data_sort
         
 def index(request):
-    list_id=0
+    list_id = 0
     return HttpResponseRedirect(reverse('etask.views.views_task_list', args=(list_id,)))
 
 def views_task_list(request, list_id):
@@ -57,24 +58,25 @@ def views_task_list(request, list_id):
     
     data = subnav_button_data()
     button_data = data.button_sort()
-    
-    menu = []
-    if list_id == 0:
-        for task_lists in latest_task_list:
-            menu.append(task_lists.list_name)         
-            data.add_dropdown_menu('移至', menu)
-    else:
-        now_list = latest_task_list.get(pk=list_id)
-        if (now_list.list_name != '存档') and (now_list.list_name != '回收站'):
-            for task_lists in latest_task_list:
-                menu.append(task_lists.list_name)         
-                data.add_dropdown_menu('移至', menu)
-            
+
     if list_id == 0:
         all_task = task.objects.all().order_by('task_list', '-priority', 'pub_date')
+        all_task_lists = all_task_list()
+        all_task = all_task.filter(task_list__in=all_task_lists)
+        
+        menu = []
+        for task_lists in latest_task_list:
+            menu.append(task_lists)       
+            data.add_dropdown_menu('移至', menu)
     else:
         t = task_list.objects.get(pk=list_id)  
         all_task = t.task_set.all().order_by('task_list', '-priority', 'pub_date')
+             
+        menu = []
+        for task_lists in latest_task_list:
+            if task_lists.id != list_id:
+                menu.append(task_lists)       
+                data.add_dropdown_menu('移至', menu)
     
     c = RequestContext(request, {
         'latest_task_list': latest_task_list,
@@ -95,9 +97,12 @@ def actions(request, list_id):
         move_task(queryset, '存档')
         return return_http(list_id)   
 
-    elif request.POST.has_key('move'):
-        
-        return HttpResponse('移动')
+    elif request.POST.has_key('move'):       
+        target_list_id = request.POST.get('move')
+        task_list_obj = task_list.objects.get(pk=int(target_list_id))
+        task_list_name = task_list_obj.list_name
+        move_task(queryset, task_list_name)
+        return return_http(list_id)
         
     elif request.POST.has_key('delete'):
         move_task(queryset, '回收站')
@@ -123,3 +128,13 @@ def return_http(list_id):
 def move_task(queryset, list_names):
     recycle = task_list.objects.get(list_name=list_names)
     queryset.update(task_list=recycle)
+    
+def all_task_list():
+    latest_task_list = task_list.objects.all()
+    all_task_list = []
+    
+    for task_list_obj in  latest_task_list:
+        if (task_list_obj.id != 6) and (task_list_obj.id != 7):
+            all_task_list.append(task_list_obj.id)
+            
+    return all_task_list

@@ -26,19 +26,19 @@
   			{% endifequal %}
   			{% ifequal button.3 'dropdown' %}		
   			<div class="btn-group">
-  			<button name={{ button.1 }} class="btn dropdown-toggle mybutton" data-toggle="dropdown" />
+  			<button class="btn dropdown-toggle mybutton" data-toggle="dropdown" />
   			{{ button.2 }}
   			<span class="caret"></span></button>
   				<ul class="dropdown-menu">
+  				<input id="submib_value"  type="hidden">
   				{% for menu in button.5 %}
-    			<li><a href="#">{{ menu  }}</a></li>
+    			<li><a href="#" name={{ button.1 }} value={{ menu.id }}>{{ menu.list_name }}</a></li>
     			{% endfor %}
   				</ul>
   			</div>
   			{% endifequal %}
   			{% endfor %}
-  			{% endif %}
-  			
+  			{% endif %}  			
   			</span>
 {% endblock %}
 

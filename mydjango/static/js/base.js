@@ -47,5 +47,13 @@ $(document).ready(function(){
     		$(this).show();
     	})
     }
+    
+    $(".dropdown-menu").find("a").click(function(){
+    	var names = $(this).attr("name");
+    	var values = $(this).attr("value");
+    	$("#submib_value").attr('name', names);
+    	$("#submib_value").attr('value', values);
+    	$("#edit_list").submit();
+    })
 
 })

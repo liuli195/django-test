@@ -34,7 +34,7 @@
    	{% block navbar-top %}
    	{% endblock %}
    	
-    <form action="{{ url_actions }}" method="post" id="edit-list">
+    <form action="{{ url_actions }}" method="post" id="edit_list">
     {% csrf_token %}
    	{% block content %}
    	<div class="container subnav affix">
