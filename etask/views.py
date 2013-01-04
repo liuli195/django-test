@@ -147,7 +147,11 @@ def actions(request, list_id):
     elif request.POST.has_key('delete'):
         move_task(queryset, '回收站')
         return return_http(list_id) 
-   
+    
+    elif request.POST.has_key('redel'):
+        queryset.delete()
+        return return_http(list_id)
+    
     elif request.POST.has_key('add'):
         
         return HttpResponse('新增')

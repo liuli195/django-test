@@ -63,8 +63,10 @@
                   <td><span class="badge badge-important">{{ task.priority }}</span></td>
                   {% endifequal %}
                   
+                  {% ifequal activeid 0 %}
+                  <td><span class="label">{{ task.task_list }}</span></td>
+                  {% endifequal %}
                   <td>{{ task.task_text }}</td>
-                  <td>{{ task.task_list }}</td>
                   <td>{{ task.pub_date }}</td>
                 </tr>
                 {% endfor %}
