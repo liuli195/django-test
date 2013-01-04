@@ -13,8 +13,3 @@ def all_task_list():
     return all_task_list
 
 print all_task_list()
-
-
-
-            
-

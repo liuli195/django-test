@@ -22,9 +22,12 @@
   			{% if button_data %}
   			{% for button in button_data %} 
   			{% ifequal button.3 'none' %}		
+  			  {% ifequal button.4 'show' %}
   			<button name={{ button.1 }} class="btn mybutton" >{{ button.2 }}</button>
+  			  {% endifequal %}
   			{% endifequal %}
-  			{% ifequal button.3 'dropdown' %}		
+  			{% ifequal button.3 'dropdown' %}
+  			 {% ifequal button.4 'show' %}		
   			<div class="btn-group">
   			<button class="btn dropdown-toggle mybutton" data-toggle="dropdown" />
   			{{ button.2 }}
@@ -36,6 +39,7 @@
     			{% endfor %}
   				</ul>
   			</div>
+  			{% endifequal %}
   			{% endifequal %}
   			{% endfor %}
   			{% endif %}  			
