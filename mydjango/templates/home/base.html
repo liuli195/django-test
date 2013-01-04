@@ -37,20 +37,24 @@
     <form action="{{ url_actions }}" method="post" id="edit_list">
     {% csrf_token %}
    	{% block content %}
-   	<div class="container subnav affix">
+   	<div class="container-fluid subnav affix">
    	{% block subnav %}
    	{% endblock %}
    	</div>
-    
+
     <div class="container-fluid">
   	  <div class="row-fluid">
   	  	
-  	    <div class="span3">
+  	    <div class="span2">
   	      {% block navlist %}
 	      {% endblock %}
     	</div>
     	
-        <div class="span9 subnavpadd">
+        <div class="span10 subnavpadd">
+        <div class="alert myalert horizontal-center fade in">
+          <a class="close" data-dismiss="alert" href="#">×</a>
+          <strong>警告！</strong> 在贵国遵守宪法就要违反刑法。
+        </div>
           {% block incontent %}
           <div>
             <h1>一切从这里开始！</h1>

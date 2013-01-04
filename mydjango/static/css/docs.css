@@ -834,7 +834,7 @@ form.bs-docs-example {
   opacity: 1;
 }
 .bs-docs-sidenav.affix {
-  top: 65px;
+  top: 52px;
 }
 .bs-docs-sidenav.affix-bottom {
   position: absolute;
@@ -855,10 +855,10 @@ form.bs-docs-example {
     max-width: 970px;
   }
   .bs-docs-sidenav {
-    width: 300px;
+    width: 205px;
   }
   .bs-docs-sidenav > li > a {
-    width: 300px \9; /* Override the previous IE8-9 hack */
+    width: 205px \9; /* Override the previous IE8-9 hack */
   }
 }
 
@@ -1082,7 +1082,7 @@ form.bs-docs-example {
           border-radius: 4px;
 }
 .subnavpadd {
-  padding-top: 55px;
+  padding-top: 41px;
 }
 
 .margin {
@@ -1113,4 +1113,9 @@ form.bs-docs-example {
 
 #btn-hide > .btn:first-child {
 	margin-right: 12px;
+}
+
+.myalert{
+	margin-bottom: 0px;
+	padding: 2px 35px 2px 14px;
 }
