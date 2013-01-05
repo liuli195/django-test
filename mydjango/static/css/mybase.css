@@ -1,0 +1,58 @@
+body {
+      padding-top: 40px;
+      padding-bottom: 40px;
+}
+
+.sidebar-nav {
+        padding: 9px 0px;
+}
+
+.mybutton {
+	padding: 4px 18px;
+	margin:  0px 6px;
+}
+
+.myaddbutton {
+	padding: 4px 30px;
+}
+
+#btn-hide > .btn:first-child {
+	margin-right: 12px;
+}
+
+.mybar {
+	width: 190px;
+	margin-top: 60px;
+}
+
+.mysubnav {
+	width: 100%;
+	height: 40px;
+	background-color: whiteSmoke;
+	line-height: 36px;
+	border: 1px solid #E3E3E3;
+}
+
+.horizontal-center {
+	text-align: center;
+}
+
+.subnavpadd {
+  padding-top: 60px;
+}
+
+.myalert {
+	height: 20px;
+	padding-bottom: 2px;
+	padding-top: 2px; 
+	font-size: 11px;
+	background-color: #FFDBA5;
+	color: black;
+	margin-bottom: 0px;	
+	position: absolute;
+    left: 50%;
+}
+
+.myalert-row {
+	margin-top: 36px;
+}

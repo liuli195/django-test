@@ -4,13 +4,13 @@
   {% if latest_task_list %}
     <li {% ifequal activeid 0 %}class="active"{% endifequal %}>
       <a href="/etask/">
-  	    <i class="icon-chevron-right"></i>全部任务
+  	    全部任务
   	  </a>
     </li>
     {% for task_list in latest_task_list %}
       <li {% ifequal activeid task_list.id %}class="active"{% endifequal %}>
       	<a href="/etask/{{ task_list.id }}/">
-  	      <i class="icon-chevron-right"></i>{{ task_list.list_name }}
+  	      {{ task_list.list_name }}
   	    </a>
       </li>
     {% endfor %}

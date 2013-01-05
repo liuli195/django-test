@@ -55,5 +55,11 @@ $(document).ready(function(){
     	$("#submib_value").attr('value', values);
     	$("#edit_list").submit();
     })
+    
+    var widths = $(".myalert").width()
+    var widths = widths/2
+    $(".myalert").css("margin-left", "-" + widths +"px");
+    
+    /*$(".alert").alert('close');*/
 
 })

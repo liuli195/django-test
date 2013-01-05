@@ -3,13 +3,17 @@
 {% block navbar-top %}
 	<div class="navbar navbar-inverse navbar-fixed-top">
       <div class="navbar-inner">
-        <div class="container margin">
+        <div class="container-fluid">
           <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
+            <!--<a class="brand" href="#">Project name</a>-->
           </a>
           <div class="nav-collapse collapse">
+          	<!--<p class="navbar-text pull-right">
+              Logged in as <a href="#" class="navbar-link">Username</a>
+           </p>-->
             <ul class="nav">
               <li {% if home %}class="active"{% endif %}><a href="/../">首页</a></li>
               <li {% if etask %}class="active"{% endif %}><a href="/etask/">任务</a></li>
@@ -23,21 +27,23 @@
 {% endblock %}
 
 {% block subnav %}
-  	  <div class="row-fluid>
-  	  	<div class="span2 horizontal-center vertical-center">
-         <button name="add" class="btn btn-danger myaddbutton">新增任务</button>
+  	  <div class="row-fluid">
+  	  	<div class="span2 horizontal-center">
+        <button name="add" class="btn btn-danger myaddbutton">新增任务</button>
         </div>
-        <div class="span10 vertical-center">
-        	<a class="btn disabled mybutton"><input type="checkbox" id='all'/></a>		
+        <div class="span10">
+  			<a class="btn disabled mybutton"><input type="checkbox" id='all'/></a>		
   			{% block btngroup %}
   			{% endblock %}
-    	</div>
+    	</div>  	
   	  </div>
 {% endblock %}
 
 {% block navlist %}
-  <ul class="nav nav-list bs-docs-sidenav affix">
+<div class="well sidebar-nav mybar" data-spy="affix">
+  <ul class="nav nav-list">
     {% block nav-list-name %}
     {% endblock %}
   </ul>
+</div>
 {% endblock %}
