@@ -60,8 +60,14 @@ $(document).ready(function(){
     var widths = widths/2
     $(".myalert").css("margin-left", "-" + widths +"px");
     
-    /*$(".alert").alert('close');*/
+    setTimeout(function(){$(".alert").alert('close');},20000);
+    /*
+    if($.cookie("last_message") != $.cookie("message")){
+    	$.cookie("last_message", $.cookie("message"))
+    	
+    	var messages = $.cookie('message');
+    	$("messages").appendTo("#message");
+    	$(".alert").alert()
+    }*/
     
-    setTimeout(function(){$(".alert").alert('close');},10000);
-
 })
