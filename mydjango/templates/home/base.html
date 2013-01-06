@@ -39,12 +39,14 @@
     <div class="container-fluid">
   	  <div class="row-fluid">
   	  	<div class="span12">
+  	  		{% if data.message %}
   	  		<div class="row-fluid myalert-row" data-spy="affix">
   	  		 <div class="alert fade in myalert">
             	<button type="button" class="close" data-dismiss="alert">×</button>
-            	<strong>请注意：在本国遵守宪法就要触犯刑法！</strong>
+            	<strong>{{ data.message }}</strong>
     		</div>
     	   </div>
+    	   {% endif %}
   	  	<div class="row-fluid">
   	    <div class="span2">
   	      {% block navlist %}

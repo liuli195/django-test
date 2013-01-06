@@ -42,17 +42,18 @@ body {
 }
 
 .myalert {
-	height: 20px;
-	padding-bottom: 2px;
-	padding-top: 2px; 
-	font-size: 11px;
-	background-color: #FFDBA5;
-	color: black;
-	margin-bottom: 0px;	
-	position: absolute;
-    left: 50%;
+	height: 24px; 
+	padding-bottom: 0px; 
+	padding-top: 5px; 
+	font-size: 13px; 
+	background-color: #FFDBA5; 
+	color: black; 
+	margin-bottom: 0px; 
+	position: absolute; 
+    left: 50%; 
 }
 
 .myalert-row {
-	margin-top: 36px;
+	margin-top: 34px;
 }
+

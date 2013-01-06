@@ -61,5 +61,7 @@ $(document).ready(function(){
     $(".myalert").css("margin-left", "-" + widths +"px");
     
     /*$(".alert").alert('close');*/
+    
+    setTimeout(function(){$(".alert").alert('close');},10000);
 
 })
