@@ -51,9 +51,6 @@ body {
 	margin-bottom: 0px; 
 	position: absolute; 
     left: 50%; 
-}
-
-.myalert-row {
-	margin-top: 34px;
+    top: 75px;
 }
 

@@ -49,7 +49,7 @@
 {% block incontent %}
 <table class="table table-hover table-condensed">
               <tbody id="selected-light">
-              	{% for task in all_task %}
+              	{% for task in data.all_task %}
                 <tr id={{ task.id }}>
                   <td><input type="checkbox" id={{ task.id }} name="chioce-{{ task.id }}" value="{{ task.id }}" /></td>
                   

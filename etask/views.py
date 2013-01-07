@@ -21,7 +21,6 @@ def views_task_list(request, data):
     
     c = RequestContext(request, {
         'latest_task_list': data.latest_task_list,
-        'all_task': data.all_task,
         'etask': 'yes',
         'activeid': data.list_id,
         'url_actions': data.url_actions,
@@ -102,7 +101,8 @@ class handle_data(temporary_data):
             self.all_task = task.objects.filter(task_list__in=all_task_lists).order_by('task_list', '-priority', 'pub_date')
         else:
             t = task_list.objects.get(pk=self.list_id)
-            self.all_task = t.task_set.all().order_by('task_list', '-priority', 'pub_date')
+            if t.task_set.all():
+                self.all_task = t.task_set.all().order_by('task_list', '-priority', 'pub_date')
     
     def menu_data(self):
         
@@ -142,8 +142,6 @@ class handle_data(temporary_data):
         if 'message' in self.request.COOKIES:
             messages = self.request.COOKIES['message']
             self.message = messages
-                
-            del self.request.COOKIES['message']
       
 class admin_action:
     def __init__(self, requests, list_ids):
