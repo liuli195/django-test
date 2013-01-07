@@ -34,10 +34,10 @@ def views_task_list(request, data):
 
 def actions(request, data):
     list_id = data.list_id
-    admin_actions = admin_action(request, list_id)
-    admin_actions.Dispatcher()
+    myactions = myaction(request, list_id)
+    myactions.dispatcher()
     
-    return admin_actions.response
+    return myactions.response
 
 class temporary_data:
     def __init__(self, request):
@@ -51,6 +51,7 @@ class temporary_data:
             [20, 'move', '移至', 'dropdown', 'show', []],
             [30, 'delete', '删除', 'none', 'show', []],
             [15, 'redel', '彻底删除', 'none', 'hide', []],
+            [5, 'add_task', '新增任务', 'none', 'show', []],
         ]
         
         return self.init_button_data
@@ -85,6 +86,7 @@ class handle_data(temporary_data):
         self.set_button_data()
         self.set_task_data()
         self.show_message()
+        self.add_form_tasklist = self.remove_menu([6, 7])
           
     def set_button_data(self):
         if self.list_id == 6:
@@ -145,42 +147,20 @@ class handle_data(temporary_data):
       
 class admin_action:
     def __init__(self, requests, list_ids):
+        self.data = temporary_data(requests)
         self.request = requests
         self.list_id = list_ids
         self.queryset = self.querysets()
         self.count = self.queryset.count()
         self.response = self.return_http()
     
-    def Dispatcher(self):
+    def dispatcher(self):
         
-        if self.request.POST.has_key('fulfill'):
-            self.move_task('存档')
-            
-            self.set_message('已将 %s 个任务存档。' % self.count)
-    
-        elif self.request.POST.has_key('move'): 
-            target_list_id = self.request.POST.get('move')
-            task_list_obj = task_list.objects.get(pk=int(target_list_id))
-            task_list_name = task_list_obj.list_name
-            self.move_task(task_list_name)
-            
-            name = task_list_name.encode('utf-8')
-            self.set_message('已将 %s 个任务移至 %s 。' % (self.count, name))
-            
-        elif self.request.POST.has_key('delete'):
-            self.move_task('回收站')
-            
-            self.set_message('已将 %s 个任务移至 回收站。' % self.count)
-        
-        elif self.request.POST.has_key('redel'):
-            self.queryset.delete()
-            
-            self.set_message('已将 %s 个任务彻底删除，这个行为将不能撤销。' % self.count)
-        
-        elif self.request.POST.has_key('add'):
-            
-            return HttpResponse('新增')
-    
+        for action in self.data.button_data:
+            if self.request.POST.has_key(action[1]):
+                fun = getattr(self,action[1])
+                fun()
+
     def querysets(self):
         value_list=[]
         
@@ -199,4 +179,29 @@ class admin_action:
         
     def set_message(self, message):
         self.response.set_cookie('message', message)
+        
+class myaction(admin_action):
+    def __init__(self, requests, list_ids):
+        admin_action.__init__(self, requests, list_ids)
+        
+    def fulfill(self):
+        self.move_task('存档')           
+        self.set_message('已将 %s 个任务存档。' % self.count)
     
+    def move(self):    
+        target_list_id = self.request.POST.get('move')
+        task_list_obj = task_list.objects.get(pk=int(target_list_id))
+        task_list_name = task_list_obj.list_name
+        self.move_task(task_list_name)
+            
+        name = task_list_name.encode('utf-8')
+        self.set_message('已将 %s 个任务移至 %s 。' % (self.count, name))
+        
+    def delete(self):
+        self.move_task('回收站')
+        self.set_message('已将 %s 个任务移至 回收站。' % self.count)
+        
+    def redel(self):
+        self.queryset.delete()            
+        self.set_message('已将 %s 个任务彻底删除，这个行为将不能撤销。' % self.count)
+        

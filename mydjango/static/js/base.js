@@ -59,8 +59,6 @@ $(document).ready(function() {
     var widths = widths / 2
     $(".myalert").css("margin-left", "-" + widths + "px");
     
-
-    
     if ($(".alert").attr("state") == "show") {
         $(".alert").show()
         

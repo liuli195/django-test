@@ -29,7 +29,18 @@
 {% block subnav %}
   	  <div class="row-fluid">
   	  	<div class="span2 horizontal-center">
-        <button name="add" class="btn btn-danger myaddbutton">新增任务</button>
+  	  	  	{% if button_data %}
+  			{% for button in button_data %}
+  			{% ifequal button.3 'none' %}		
+  			{% ifequal button.4 'show' %}
+  			{% ifequal button.1 'add_task' %}
+        <button class="btn btn-danger myaddbutton" data-toggle="modal" data-target="#add_task_modal">
+        {{ button.2 }}</button>
+        	{% endifequal %}
+        	{% endifequal %}
+        	{% endifequal %}
+        	{% endfor %}
+        	{% endif %}
         </div>
         <div class="span10">
             {% if data.all_task %}
