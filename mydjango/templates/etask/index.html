@@ -1,5 +1,23 @@
 {% extends "home/navbar-top.html" %}
 
+{% block add_nav %}
+<input class="span6 add_input" name="add_task" style="margin-bottom: 0px;" type="text" placeholder="输入任务，回车提交">
+			
+<div class="popover fade right in" id="input_list" style="display: none;">
+	<div class="arrow" style="top: 18px;"></div>
+		<div class="popover-inner">
+			<div class="popover-content">
+			  <ul class="nav nav-list">
+  				<li class="active"><a href="#">任务内容：我的东西是什么额度的inid你的是我的东西是什么额度的</a></li>
+  				<li><a href="#">开始时间：今日待办</a></li>
+  				<li><a href="#">优先级：3</a></li>
+			  </ul>
+		   </div>
+		</div>
+	</div>
+</div>
+{% endblock %}
+
 {% block nav-list-name %}
   {% if latest_task_list %}
     <li {% ifequal activeid 0 %}class="active"{% endifequal %}>
@@ -18,12 +36,10 @@
 {% endblock %}
 
 {% block incontent %}
-
-{% block btngroup %}
-<div class="row-fluid add_nav" data-spy="affix">
+<div class="row-fluid button_nav" data-spy="affix">
 	<div class="span12" style="padding-left: 2px;">
             {% if data.all_task %}
-  			<a class="btn disabled mybutton"><input type="checkbox" id='all'/></a>	
+  			<a class="btn disabled mybutton"><input type="checkbox" id='all'/></a>
   			{% endif %}
   			<span id="btn-hide" style="display: none;">
   			{% if button_data %}
@@ -57,7 +73,6 @@
   			</span>
   	</div>
 </div>
-{% endblock %}
 
 <div class="row-fluid">
 	<div class="span12">

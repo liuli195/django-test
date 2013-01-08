@@ -78,14 +78,39 @@ $(document).ready(function() {
     }
     
     //同步新增工具栏和列表的宽度
-    var widths = $("#selected-light").width()
-    $(".add_nav").css("width", widths + "px");
+    var widths = $("#selected-light").width();
+    $(".button_nav").css("width", widths + "px");
     
-    //初始化弹出提示框
-    $('.myicon').popover({
-    	placement: 'bottom',
-    	content: '!优先级<br/>^开始时间',
-    	title: '智能添加快捷键',
-    	html: true,
+    //页面载入时，设置输入列表的位置 和大小
+
+    
+    //输入框获得焦点时，弹出输入列表 
+    $('.add_input').focus(function() {
+    	var post = $('.add_input').offset();
+    	var width = $('.add_input').width();
+    	var left_post = post.left + width + 18;
+    	$('#input_list').css({'width':'480px', 'top':'4px', 'left': left_post + 'px'});
+    	$('#input_list').show();	
     })
+    
+    //输入框失去焦点时，隐藏输入列表 
+    $('.add_input').blur(function() {
+    	$('#input_list').hide();
+    })
+    
+    //监视键盘的TAB键的事件，用来切换输入列表
+    $('.add_input').keydown(function(event) {	
+    	var $input_list = $('#input_list .active')
+    	if (event.which == 9){
+    		event.preventDefault();
+    		$input_list.removeClass('active');
+	    	if ($input_list.next().length > 0) {
+	    		$input_list.next().addClass('active');
+	    	} else {
+	    		$('#input_list').find('li').first().addClass('active');
+	    	}
+    	}
+    	
+    })
+
 })

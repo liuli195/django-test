@@ -1,11 +1,10 @@
-
 body {
-      padding-top: 40px;
-      padding-bottom: 40px;
+    padding-top: 40px;
+	padding-bottom: 40px;
 }
 
 .sidebar-nav {
-        padding: 9px 0px;
+	padding: 9px 0px;
 }
 
 .mybutton {
@@ -32,7 +31,7 @@ body {
 	z-index: 10;
 }
 
-.add_nav {
+.button_nav {
 	height: 40px;
 	background-color: white;
 	line-height: 36px;
@@ -60,7 +59,7 @@ body {
 	margin-bottom: 0px; 
 	position: absolute; 
     left: 50%; 
-    top: 67px;
+    top: 70px;
     z-index: 20;
 }
 
@@ -68,17 +67,7 @@ body {
 	margin-left: 4px;
 }
 
-.modal_body_pad {
-    padding-bottom: 60px;
-	padding-left: 42px;
-	padding-right: 42px;
-}
-
 .app_title {
 	font-size: 20px;
 	color: #DA4F49;
-}
-
-.icon-question-sign {
-	margin-top: 4px
 }
