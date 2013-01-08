@@ -29,25 +29,14 @@
 {% block subnav %}
   	  <div class="row-fluid">
   	  	<div class="span2 horizontal-center">
-  	  	  	{% if button_data %}
-  			{% for button in button_data %}
-  			{% ifequal button.3 'none' %}		
-  			{% ifequal button.4 'show' %}
-  			{% ifequal button.1 'add_task' %}
-        <button class="btn btn-danger myaddbutton" data-toggle="modal" data-target="#add_task_modal">
-        {{ button.2 }}</button>
-        	{% endifequal %}
-        	{% endifequal %}
-        	{% endifequal %}
-        	{% endfor %}
-        	{% endif %}
+  	  	<p>
+        <strong class="app_title">
+        Easy Task</strong>
+        </p>
         </div>
         <div class="span10">
-            {% if data.all_task %}
-  			<a class="btn disabled mybutton"><input type="checkbox" id='all'/></a>	
-  			{% endif %}
-  			{% block btngroup %}
-  			{% endblock %}
+			<input class="span7" style="margin-bottom: 0px;" type="text" placeholder="输入任务，回车提交">
+			<a href="#" class="myicon"><i class="icon-question-sign"></i></a>
     	</div>  	
   	  </div>
 {% endblock %}

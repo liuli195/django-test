@@ -13,17 +13,14 @@ body {
 	margin:  0px 6px;
 }
 
-.myaddbutton {
-	padding: 4px 30px;
-}
-
 #btn-hide > .btn:first-child {
 	margin-right: 12px;
 }
 
 .mybar {
 	width: 190px;
-	margin-top: 60px;
+	margin-top: 41px;
+	border-top: 0px;
 }
 
 .mysubnav {
@@ -32,6 +29,14 @@ body {
 	background-color: whiteSmoke;
 	line-height: 36px;
 	border: 1px solid #E3E3E3;
+	z-index: 10;
+}
+
+.add_nav {
+	height: 40px;
+	background-color: white;
+	line-height: 36px;
+	border-bottom: 1px solid #E3E3E3;
 }
 
 .horizontal-center {
@@ -39,20 +44,24 @@ body {
 }
 
 .subnavpadd {
-  padding-top: 60px;
+  padding-top: 42px;
+}
+
+.tabal-margin {
+	margin-top: 40px;
 }
 
 .myalert {
-	height: 24px; 
+	height: 20px; 
 	padding-bottom: 0px; 
-	padding-top: 5px; 
 	font-size: 13px; 
 	background-color: #FFDBA5; 
 	color: black; 
 	margin-bottom: 0px; 
 	position: absolute; 
     left: 50%; 
-    top: 75px;
+    top: 67px;
+    z-index: 20;
 }
 
 .mymargin{
@@ -63,4 +72,13 @@ body {
     padding-bottom: 60px;
 	padding-left: 42px;
 	padding-right: 42px;
+}
+
+.app_title {
+	font-size: 20px;
+	color: #DA4F49;
+}
+
+.icon-question-sign {
+	margin-top: 4px
 }
