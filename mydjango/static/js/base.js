@@ -46,7 +46,7 @@ $(document).ready(function() {
         }
     })
     
-    //如果复选框和任务默认情况下是选择的，则高色
+    //如果复选框和任务默认情况下是选择的，则高亮
     $('#selected-light > tr:has(:checked)').addClass("info");
     
     if ($("#selected-light").find('input:checkbox:checked').length != 0) {
@@ -81,20 +81,19 @@ $(document).ready(function() {
     var widths = $("#selected-light").width();
     $(".button_nav").css("width", widths + "px");
     
-    //页面载入时，设置输入列表的位置 和大小
-
-    
-    //输入框获得焦点时，弹出输入列表 
+    //输入框获得焦点时，弹出输入列表并获取保存的内容
     $('.add_input').focus(function() {
     	var post = $('.add_input').offset();
     	var width = $('.add_input').width();
     	var left_post = post.left + width + 18;
-    	$('#input_list').css({'width':'480px', 'top':'4px', 'left': left_post + 'px'});
+    	$(this).val($('#input_list .active').find('.text').text())
+    	$('#input_list').css({'width-max':'480px','width':'auto','top':'4px','left':left_post + 'px'});
     	$('#input_list').show();	
     })
     
     //输入框失去焦点时，隐藏输入列表 
     $('.add_input').blur(function() {
+    	$(this).val(null)
     	$('#input_list').hide();
     })
     
@@ -102,15 +101,33 @@ $(document).ready(function() {
     $('.add_input').keydown(function(event) {	
     	var $input_list = $('#input_list .active')
     	if (event.which == 9){
-    		event.preventDefault();
-    		$input_list.removeClass('active');
-	    	if ($input_list.next().length > 0) {
-	    		$input_list.next().addClass('active');
-	    	} else {
-	    		$('#input_list').find('li').first().addClass('active');
-	    	}
+    		event.preventDefault();  		
+    		$('.add_input').keyup(function(event) {
+    			if (event.which == 9){	  		
+		    		$input_list.removeClass('active');
+			    	if ($input_list.next().length > 0) {
+			    		$input_list.next().addClass('active');
+			    		$(this).val($input_list.next().find('.text').text());
+			    	} else {
+			    		$('#input_list').find('li').first().addClass('active');
+			    		$(this).val($('#input_list').find('li').first().find('.text').text());
+			    	}
+			    }
+	    	})
     	}
-    	
     })
-
+    
+    //监视键盘的keypress事件，实时保存用户的输入 
+    $('.add_input').keyup(function(event) {
+    	var $input_list = $('#input_list .active').find('.text');
+    	$input_list.text($(this).val());
+    	var id = $('#input_list .active').attr('index');
+    	$("#" + id).val($(this).val());
+    	var $bb = $("#" + id)
+    })
+    
+    //添加一个任务成功后，任务输入框默认获得焦点
+    if ($('.add_input').hasClass(".focus")) {
+    	$('.add_input').focus();
+    }
 })

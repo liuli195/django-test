@@ -1,16 +1,21 @@
 {% extends "home/navbar-top.html" %}
 
 {% block add_nav %}
-<input class="span6 add_input" name="add_task" style="margin-bottom: 0px;" type="text" placeholder="输入任务，回车提交">
-			
+<input class="span6 add_input" style="margin-bottom: 0px;" type="text" placeholder="新增任务，回车提交">
+<input type="submit"  name="add_task" style="display: none;" />
+<input type="hidden" id='task_text' name="task_text" />
+<input type="hidden" id='priority'  name="priority" value="1" />
+<input type="hidden" id='task_list' name="task_list" value={{ data.list_names }} />
+
 <div class="popover fade right in" id="input_list" style="display: none;">
 	<div class="arrow" style="top: 18px;"></div>
 		<div class="popover-inner">
+			<h3 class="popover-title">按Tab键切换要输入的内容</h3>
 			<div class="popover-content">
 			  <ul class="nav nav-list">
-  				<li class="active"><a href="#">任务内容：我的东西是什么额度的inid你的是我的东西是什么额度的</a></li>
-  				<li><a href="#">开始时间：今日待办</a></li>
-  				<li><a href="#">优先级：3</a></li>
+  				<li class="active selete" index='task_text'><a href="#"><strong>任务内容：</strong><strong class="text"></strong></a></li>
+  				<li class="selete" index='task_list'><a href="#"><strong>任务箱子：</strong><strong class="text">{{ data.list_names }}</strong></a></li>		
+  				<li class="selete" index='priority'><a href="#"><strong>优先级：</strong><strong class="text">1</strong></a></li>
 			  </ul>
 		   </div>
 		</div>
@@ -69,7 +74,7 @@
   			{% endifequal %}
   			{% endifequal %}
   			{% endfor %}
-  			{% endif %}  			
+  			{% endif %}		
   			</span>
   	</div>
 </div>
@@ -79,9 +84,8 @@
 			<table class="table table-hover table-condensed tabal-margin">
               <tbody id="selected-light">
               	{% for task in data.all_task %}
-                <tr id={{ task.id }} style="cursor:pointer">
+                <tr id={{ task.id }} style="cursor:pointer" {% if forloop.first and data.message.1 %}class="new"{% endif %}>
                   <td><input type="checkbox" id={{ task.id }} name="chioce-{{ task.id }}" value="{{ task.id }}" /></td>
-                  
                   {% ifequal task.priority 1 %}
                   <td><span class="badge badge-success">{{ task.priority }}</span></td>
                   {% endifequal %}                

@@ -5,6 +5,7 @@ from django.http import HttpResponse, HttpResponseRedirect
 from django.shortcuts import render_to_response, get_object_or_404
 from django.core.urlresolvers import reverse
 import os
+import datetime
 
 from etask.models import task_list, task
 
@@ -14,6 +15,7 @@ def index_re(request):
 def index(request, list_id, run):
     list_id = int(list_id)
     data = handle_data(request, list_id)
+    data.message
     
     return run(request, data)
 
@@ -85,8 +87,16 @@ class handle_data(temporary_data):
         self.list_id = list_ids
         self.set_button_data()
         self.set_task_data()
-        self.show_message()
+        self.set_list_name()
+        self.message = self.show_message()
         self.add_form_tasklist = self.remove_menu([6, 7])
+        
+    def set_list_name(self):
+            if self.list_id == 0 or self.list_id == 6 or self.list_id == 7:
+                self.list_names = '收集箱'
+            else:
+                task_list_obj = task_list.objects.get(pk=self.list_id)
+                self.list_names = task_list_obj.list_name
           
     def set_button_data(self):
         if self.list_id == 6:
@@ -100,7 +110,7 @@ class handle_data(temporary_data):
     def set_task_data(self):  
         if self.list_id == 0:
             all_task_lists = self.all_task_list()
-            self.all_task = task.objects.filter(task_list__in=all_task_lists).order_by('task_list', '-priority', 'pub_date')
+            self.all_task = task.objects.filter(task_list__in=all_task_lists).order_by('task_list', '-priority', '-pub_date')
         else:
             t = task_list.objects.get(pk=self.list_id)
             if t.task_set.all():
@@ -139,12 +149,11 @@ class handle_data(temporary_data):
                 all_task_list.append(task_list_obj.id)
                 
         return all_task_list
-
+    
     def show_message(self):
         if 'message' in self.request.COOKIES:
-            messages = self.request.COOKIES['message']
-            self.message = messages
-      
+            return self.request.COOKIES['message']
+    
 class admin_action:
     def __init__(self, requests, list_ids):
         self.data = temporary_data(requests)
@@ -158,7 +167,7 @@ class admin_action:
         
         for action in self.data.button_data:
             if self.request.POST.has_key(action[1]):
-                fun = getattr(self,action[1])
+                fun = getattr(self, action[1])
                 fun()
 
     def querysets(self):
@@ -177,8 +186,9 @@ class admin_action:
         recycle = task_list.objects.get(list_name=list_names)
         self.queryset.update(task_list=recycle)
         
-    def set_message(self, message):
-        self.response.set_cookie('message', message)
+    def set_message(self, **keys):
+        for key in keys.keys():
+            self.response.set_cookie(key, keys[key])
         
 class myaction(admin_action):
     def __init__(self, requests, list_ids):
@@ -186,7 +196,7 @@ class myaction(admin_action):
         
     def fulfill(self):
         self.move_task('存档')           
-        self.set_message('已将 %s 个任务存档。' % self.count)
+        self.set_message(message='已将 %s 个任务存档。' % self.count)
     
     def move(self):    
         target_list_id = self.request.POST.get('move')
@@ -195,13 +205,23 @@ class myaction(admin_action):
         self.move_task(task_list_name)
             
         name = task_list_name.encode('utf-8')
-        self.set_message('已将 %s 个任务移至 %s 。' % (self.count, name))
+        self.set_message(message='已将 %s 个任务移至 %s 。' % (self.count, name))
         
     def delete(self):
         self.move_task('回收站')
-        self.set_message('已将 %s 个任务移至 回收站。' % self.count)
+        self.set_message(message='已将 %s 个任务移至 回收站。' % self.count)
         
     def redel(self):
         self.queryset.delete()            
-        self.set_message('已将 %s 个任务彻底删除，这个行为将不能撤销。' % self.count)
+        self.set_message(message='已将 %s 个任务彻底删除，这个行为将不能撤销。' % self.count)
+        
+    def add_task(self):
+        task_lists = self.request.POST["task_list"]
+        task_texts = self.request.POST["task_text"]
+        prioritys =self.request.POST["priority"]
+        datetimes = datetime.datetime.now()
+        task_list_obj = task_list.objects.get(list_name=task_lists)
+        task_list_obj.task_set.create(task_text=task_texts, priority=prioritys, pub_date=datetimes)
+        self.set_message(new='true')
+
         
