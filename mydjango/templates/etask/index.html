@@ -84,7 +84,7 @@
 			<table class="table table-hover table-condensed tabal-margin">
               <tbody id="selected-light">
               	{% for task in data.all_task %}
-                <tr id={{ task.id }} style="cursor:pointer" {% if forloop.first and data.message.1 %}class="new"{% endif %}>
+                <tr id={{ task.id }} style="cursor:pointer" {% ifequal task.id data.new %}class="new"{% endifequal %}>
                   <td><input type="checkbox" id={{ task.id }} name="chioce-{{ task.id }}" value="{{ task.id }}" /></td>
                   {% ifequal task.priority 1 %}
                   <td><span class="badge badge-success">{{ task.priority }}</span></td>

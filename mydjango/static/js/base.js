@@ -126,8 +126,9 @@ $(document).ready(function() {
     	var $bb = $("#" + id)
     })
     
-    //添加一个任务成功后，任务输入框默认获得焦点
-    if ($('.add_input').hasClass(".focus")) {
+    //添加一个任务成功后，任务输入框默认获得焦点,并高亮新任务
+    if ($subBox.hasClass("new")) {
+    	$('.new').css('background-color','#FFDBA5');
     	$('.add_input').focus();
     }
 })

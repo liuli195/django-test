@@ -52,6 +52,7 @@ body {
 
 .myalert {
 	height: 20px; 
+	padding-top: 0px; 
 	padding-bottom: 0px; 
 	font-size: 13px; 
 	background-color: #FFDBA5; 

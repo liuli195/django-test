@@ -15,7 +15,6 @@ def index_re(request):
 def index(request, list_id, run):
     list_id = int(list_id)
     data = handle_data(request, list_id)
-    data.message
     
     return run(request, data)
 
@@ -32,6 +31,7 @@ def views_task_list(request, data):
     
     response = render_to_response('etask/index.html', c)
     response.delete_cookie('message')
+    response.delete_cookie('new')
     return response
 
 def actions(request, data):
@@ -88,7 +88,7 @@ class handle_data(temporary_data):
         self.set_button_data()
         self.set_task_data()
         self.set_list_name()
-        self.message = self.show_message()
+        self.show_message()
         self.add_form_tasklist = self.remove_menu([6, 7])
         
     def set_list_name(self):
@@ -114,7 +114,7 @@ class handle_data(temporary_data):
         else:
             t = task_list.objects.get(pk=self.list_id)
             if t.task_set.all():
-                self.all_task = t.task_set.all().order_by('task_list', '-priority', 'pub_date')
+                self.all_task = t.task_set.all().order_by('task_list', '-priority', '-pub_date')
     
     def menu_data(self):
         
@@ -152,8 +152,10 @@ class handle_data(temporary_data):
     
     def show_message(self):
         if 'message' in self.request.COOKIES:
-            return self.request.COOKIES['message']
-    
+            self.message = self.request.COOKIES['message']
+        if 'new' in self.request.COOKIES:
+            self.new = int(self.request.COOKIES['new'])
+
 class admin_action:
     def __init__(self, requests, list_ids):
         self.data = temporary_data(requests)
@@ -221,7 +223,7 @@ class myaction(admin_action):
         prioritys =self.request.POST["priority"]
         datetimes = datetime.datetime.now()
         task_list_obj = task_list.objects.get(list_name=task_lists)
-        task_list_obj.task_set.create(task_text=task_texts, priority=prioritys, pub_date=datetimes)
-        self.set_message(new='true')
+        p = task_list_obj.task_set.create(task_text=task_texts, priority=prioritys, pub_date=datetimes)
+        self.set_message(new=p.id)
 
         
