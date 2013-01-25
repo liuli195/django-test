@@ -87,7 +87,7 @@ $(document).ready(function() {
     	var width = $('.add_input').width();
     	var left_post = post.left + width + 18;
     	$(this).val($('#input_list .active').find('.text').text())
-    	$('#input_list').css({'width-max':'480px','width':'auto','top':'4px','left':left_post + 'px'});
+    	$('#input_list').css({'max-width':'480px','width':'auto','top':'4px','left':left_post + 'px'});
     	$('#input_list').show();	
     })
     
