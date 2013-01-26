@@ -3,14 +3,9 @@ $(document).ready(function() {
     var $subBox = $("#selected-light > tr");
     
     //选中单个任务的行为
-    $subBox.click(function() {
-        $(this).toggleClass("info");
-        
-        if ($(this).hasClass("info")) {
-        	$(this).find("input:checkbox").attr("checked", true);
-        } else {
-        	$(this).find("input:checkbox").attr("checked", false);
-        }
+    $subBox.find("input:checkbox").click(function() {
+        var id = '#' + $(this).attr("id");
+		$(id).toggleClass("info");
         
         if ($subBox.length == $("#selected-light").find('input:checkbox:checked').length) {
             $("#all").attr("checked", true);
@@ -19,13 +14,9 @@ $(document).ready(function() {
         }
         
         if ($("#selected-light").find('input:checkbox:checked').length == 0) {
-            $("#btn-hide").each(function() {
-                $(this).hide();
-            })
+            $("#btn-hide").hide();
         } else {
-            $("#btn-hide").each(function() {
-                $(this).show();
-            })
+        	$("#btn-hide").show();
         }
     })
     
@@ -35,14 +26,10 @@ $(document).ready(function() {
         
         if (this.checked == true) {
             $("#selected-light").find("tr").addClass("info");
-            $("#btn-hide").each(function() {
-                $(this).show();
-            })
+        	$("#btn-hide").show();
         } else {
             $("#selected-light").find("tr").removeClass("info");
-            $("#btn-hide").each(function() {
-                $(this).hide();
-            })
+			$("#btn-hide").hide();
         }
     })
     
@@ -50,9 +37,7 @@ $(document).ready(function() {
     $('#selected-light > tr:has(:checked)').addClass("info");
     
     if ($("#selected-light").find('input:checkbox:checked').length != 0) {
-        $("#btn-hide").each(function() {
-            $(this).show();
-        })
+    	$("#btn-hide").show();
     }
     
     //下拉菜单使用链接提交表单
@@ -90,11 +75,26 @@ $(document).ready(function() {
     	$('#input_list').css({'max-width':'480px','width':'auto','top':'4px','left':left_post + 'px'});
     	$('#input_list').show();	
     })
+      
+    //点击外部区域隐藏输入列表
+    var $set = $("*").not('.add_input').not('#input_list')
+    var $input_list = $('#input_list *')
     
-    //输入框失去焦点时，隐藏输入列表 
-    $('.add_input').blur(function() {
-    	$(this).val(null)
+    $input_list.each(function(){
+    	$set = $set.not(this);
+    })
+    
+    $set.click(function() {
     	$('#input_list').hide();
+    })
+
+    //阻止事件的冒泡
+    $('#input_list').click(function(event) {
+    	event.stopPropagation();
+    })
+    
+    $('.add_input').click(function(event) {
+    	event.stopPropagation();
     })
     
     //监视键盘的TAB键的事件，用来切换输入列表
@@ -117,7 +117,7 @@ $(document).ready(function() {
     	}
     })
     
-    //监视键盘的keypress事件，实时保存用户的输入 
+    //监视键盘的keypress事件，实时保存用户的输入
     $('.add_input').keyup(function(event) {
     	var $input_list = $('#input_list .active').find('.text');
     	$input_list.text($(this).val());
