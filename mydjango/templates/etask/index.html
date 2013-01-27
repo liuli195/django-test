@@ -2,7 +2,7 @@
 
 {% block add_nav %}
 <input class="span6 add_input" style="margin-bottom: 0px;" type="text" autocomplete="off" placeholder="新增任务，回车提交" >
-<input type="submit"  name="add_task" style="display: none;" />
+<input type="submit" name='add_task' id='submib_addtask' style="display: none" />
 <input type="hidden" id='task_text' name="task_text" />
 <input type="hidden" id='priority'  name="priority" value="1" />
 <input type="hidden" id='task_list' name="task_list" value={{ data.list_names }} />
@@ -20,6 +20,25 @@
 		   </div>
 		</div>
 </div>
+
+<ul class="dropdown-menu autoc" style="display: none;">
+</ul>
+
+<div class='autoc-data' style="display: none">
+<ul class='task_list'>
+	<li data-value="收集箱" ><a href="#">收集箱</a></li>
+	<li data-value="今日待办" ><a href="#">今日待办</a></li>
+	<li data-value="明日待办" ><a href="#">明日待办</a></li>
+	<li data-value="择日待办" ><a href="#">择日待办</a></li>
+	<li data-value="等待" ><a href="#">等待</a></li>
+</ul>
+<ul class='priority'>
+	<li data-value="1" ><a href="#">1</a></li>
+	<li data-value="2" ><a href="#">2</a></li>
+	<li data-value="3" ><a href="#">3</a></li>
+</ul>
+</div>
+
 {% endblock %}
 
 {% block nav-list-name %}

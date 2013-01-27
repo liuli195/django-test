@@ -74,6 +74,8 @@ $(document).ready(function() {
     	$(this).val($('#input_list .active').find('.text').text())
     	$('#input_list').css({'max-width':'480px','width':'auto','top':'4px','left':left_post + 'px'});
     	$('#input_list').show();	
+    	
+    	autoc($('#input_list').find('.active'));
     })
     
     //监视失去焦点，回车，TAB事件，保存用户的输入
@@ -94,16 +96,18 @@ $(document).ready(function() {
     //监视键盘的TAB键的事件，用来切换输入列表
     $('.add_input').keydown(function(event) {	
     	var $input_list = $('#input_list .active')
-    	if (event.which == 9){
+    	if (event.which == 9) {
     		event.preventDefault(); 
     		save_text(); 				
 		    $input_list.removeClass('active');
 			if ($input_list.next().length > 0) {
 			    $input_list.next().addClass('active');
 			    $(this).val($input_list.next().find('.text').text());
+			    autoc($input_list.next());
 			} else {
 			    $('#input_list').find('li').first().addClass('active');
 			    $(this).val($('#input_list').find('li').first().find('.text').text());
+			    autoc($('#input_list').find('li').first());
 			}
     	}
     })
@@ -136,12 +140,79 @@ $(document).ready(function() {
     	$('.add_input').focus();
     }
     
-    //定义自动完成下拉菜单 
-    function source_data () {
-    	return ['1','2','3','wo','wodd'];
+    // 根据切换到的输入列表弹出自动完成，并获取数据源
+    function autoc ($item) {
+    	var post = $('.add_input').offset();
+    	var height = $('.add_input').height();
+    	var left_post = post.left;
+    	var top_post = height + 15;
+    	
+    	if (($item.attr('index') == 'task_list') || ($item.attr('index') == 'priority')) {
+    		if ($item.attr('index') == 'task_list') {
+    			$('.autoc').html($('.task_list').html());
+    		} else {
+    			$('.autoc').html($('.priority').html());
+    		}
+    		$('.autoc').css({'top': top_post + 'px', 'left':left_post + 'px'});
+    		$('.autoc').show();
+    		$('.add_input').attr('readonly', 'readonly');
+    	} else {
+    		$('.autoc').hide();
+    		$('.add_input').removeAttr('readonly');
+    	}
+    	
+    	//初始化默认选中的项目
+    	$('.autoc > li').each(function () {
+    		if ($(this).attr('data-value') == $('.add_input').val()) {
+    			$(this).addClass('active');		
+    		}
+    	})
     }
     
-    $('.add_input').typeahead({
-    	source: source_data(),
+    //输入框失去焦点时候，隐藏自动完成
+    $('.add_input').blur(function() {
+    	$('.autoc').hide();
+    	$('.add_input').removeAttr('readonly');
     })
+    
+    //监视上下键事件，切换自动完成的选项
+    $('.add_input').keydown(function(event) {
+    	var $active = $('.autoc .active')
+    	
+    	if ((event.which == 40) && ($('.autoc').is(':visible') == true)) {
+    		event.preventDefault(); 
+    		$active.removeClass('active');
+    		if ($active.next().length > 0) {
+    			$active.next().addClass('active');
+    		} else {
+    			$('.autoc').find('li').first().addClass('active');
+    		}
+    	}
+    	
+    	if ((event.which == 38) && ($('.autoc').is(':visible') == true)) {
+    		event.preventDefault();
+    		$active.removeClass('active');
+    		if ($active.prev().length > 0) {
+    			$active.prev().addClass('active');
+    		} else {
+    			$('.autoc').find('li').last().addClass('active');
+    		}
+    	}
+    })
+    
+    //监视回车事件，提交数据和提交表单
+    $('.add_input').keydown(function(event) {
+    	if ((event.which == 13) && ($('.autoc').is(':visible') == true)) {
+    		if ($('.add_input').val() == $('.autoc .active').attr('data-value')) {
+    			var names = $('#submib_addtask').attr("name");
+        		$("#submib_value").attr('name', names);
+        		$("#edit_list").submit();
+    		} else {
+    			event.preventDefault(); 
+    			$('.add_input').val($('.autoc .active').attr('data-value'));
+    			save_text();
+    		}
+    	}
+    })
+    
 })
