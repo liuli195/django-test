@@ -103,7 +103,7 @@ class handle_data(temporary_data):
             self.change(['fulfill', 'delete'], 4, 'hide')
             self.change(['redel'], 4, 'show')
         elif self.list_id == 7:
-            self.change(['fulfill', 'delete'], 4, 'hide')
+            self.change(['fulfill'], 4, 'hide')
             
         self.change(['move'], 5, self.menu_data())
       

@@ -179,7 +179,7 @@ $(document).ready(function() {
     $('.add_input').keydown(function(event) {
     	var $active = $('.autoc .active')
     	
-    	if ((event.which == 40) && ($('.autoc').is(':visible') == true)) {
+    	if ((event.which == 75) && ($('.autoc').is(':visible') == true)) {
     		event.preventDefault(); 
     		$active.removeClass('active');
     		if ($active.next().length > 0) {
@@ -189,7 +189,7 @@ $(document).ready(function() {
     		}
     	}
     	
-    	if ((event.which == 38) && ($('.autoc').is(':visible') == true)) {
+    	if ((event.which == 73) && ($('.autoc').is(':visible') == true)) {
     		event.preventDefault();
     		$active.removeClass('active');
     		if ($active.prev().length > 0) {
