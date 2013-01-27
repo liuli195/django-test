@@ -75,7 +75,39 @@ $(document).ready(function() {
     	$('#input_list').css({'max-width':'480px','width':'auto','top':'4px','left':left_post + 'px'});
     	$('#input_list').show();	
     })
-      
+    
+    //监视失去焦点，回车，TAB事件，保存用户的输入
+    function save_text () {
+        var $input_list = $('#input_list .active').find('.text');
+    	$input_list.text($('.add_input').val());
+    	var id = $('#input_list .active').attr('index');
+    	$("#" + id).val($('.add_input').val());
+    }
+    
+    $('.add_input').blur(save_text);
+    $('.add_input').keydown(function(event){
+    	if (event.which == 13) {
+    		save_text();
+    	}
+    })
+    
+    //监视键盘的TAB键的事件，用来切换输入列表
+    $('.add_input').keydown(function(event) {	
+    	var $input_list = $('#input_list .active')
+    	if (event.which == 9){
+    		event.preventDefault(); 
+    		save_text(); 				
+		    $input_list.removeClass('active');
+			if ($input_list.next().length > 0) {
+			    $input_list.next().addClass('active');
+			    $(this).val($input_list.next().find('.text').text());
+			} else {
+			    $('#input_list').find('li').first().addClass('active');
+			    $(this).val($('#input_list').find('li').first().find('.text').text());
+			}
+    	}
+    })
+    
     //点击外部区域隐藏输入列表
     var $set = $("*").not('.add_input').not('#input_list')
     var $input_list = $('#input_list *')
@@ -85,6 +117,7 @@ $(document).ready(function() {
     })
     
     $set.click(function() {
+    	$('.add_input').val(null);
     	$('#input_list').hide();
     })
 
@@ -97,38 +130,18 @@ $(document).ready(function() {
     	event.stopPropagation();
     })
     
-    //监视键盘的TAB键的事件，用来切换输入列表
-    $('.add_input').keydown(function(event) {	
-    	var $input_list = $('#input_list .active')
-    	if (event.which == 9){
-    		event.preventDefault();  		
-    		$('.add_input').keyup(function(event) {
-    			if (event.which == 9){	  		
-		    		$input_list.removeClass('active');
-			    	if ($input_list.next().length > 0) {
-			    		$input_list.next().addClass('active');
-			    		$(this).val($input_list.next().find('.text').text());
-			    	} else {
-			    		$('#input_list').find('li').first().addClass('active');
-			    		$(this).val($('#input_list').find('li').first().find('.text').text());
-			    	}
-			    }
-	    	})
-    	}
-    })
-    
-    //监视键盘的keypress事件，实时保存用户的输入
-    $('.add_input').keyup(function(event) {
-    	var $input_list = $('#input_list .active').find('.text');
-    	$input_list.text($(this).val());
-    	var id = $('#input_list .active').attr('index');
-    	$("#" + id).val($(this).val());
-    	var $bb = $("#" + id)
-    })
-    
     //添加一个任务成功后，任务输入框默认获得焦点,并高亮新任务
     if ($subBox.hasClass("new")) {
     	$('.new').css('background-color','#FFDBA5');
     	$('.add_input').focus();
     }
+    
+    //定义自动完成下拉菜单 
+    function source_data () {
+    	return ['1','2','3','wo','wodd'];
+    }
+    
+    $('.add_input').typeahead({
+    	source: source_data(),
+    })
 })
